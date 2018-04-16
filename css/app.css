@@ -108,3 +108,16 @@ h1 { /* Header */
     float: right;
     cursor: pointer;
 }
+
+/*
+ * Styles for the Modal
+ */
+
+#myModal {
+    display: none;
+    position: fixed;
+    overflow: auto;
+    z-index: 1;
+    text-align: center;
+    background-color: rgba(105, 105, 105, 0.8);
+}
