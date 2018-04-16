@@ -37,12 +37,12 @@ function updateDeck() {
 // Create function createDeck()
 function createDeck(shuffledCardsArray) {
 	// Loop through every item in shuffled cards array
-	for (const card in shuffledCardsArray) {
+	for (var i = 0; i < shuffledCardsArray.length; i++) {
 		let listEl = document.createElement('li'); // Create element <li> // Alternatively, use .attr
 		listEl.classList.add('card'); // Add .card to <li>
 		let itemEl = document.createElement('i'); // Create element <i>
 		itemEl.classList.add('fa'); // Add .fa to <i>
-		itemEl.classList.add(card); // Also add .fa-x to <i>
+		itemEl.classList.add(shuffledCardsArray[i]); // Also add .fa-x to <i>
 		// Add HTML to page
 		listEl.appendChild(itemEl); // Append every <i> to every <li>
 		deck.appendChild(listEl); // Append every <li> to #deck
