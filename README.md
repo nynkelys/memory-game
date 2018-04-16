@@ -1,4 +1,4 @@
-# Portfolio Site Project
+# Memory Game Project
 
 ## Table of Contents
 
