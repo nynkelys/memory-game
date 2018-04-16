@@ -1,4 +1,4 @@
-const cardsArray = [ // Create list that holds all cards
+const cards = [ // Create list that holds all cards
 	'fa-diamond',
 	'fa-diamond',
 	'fa-paper-plane-o',
@@ -21,30 +21,32 @@ const cardsArray = [ // Create list that holds all cards
 
 // DISPLAY CARDS ON PAGE
 
-const deck = document.getElementById('deck') // Create reference to #deck
-let shuffledArray = [];
+
+let shuffledCardsArray = [];
 let matchedCardsArray = [];
 let openCardsArray = [];
 
+const deck = document.getElementById('deck'); // Create reference to #deck
+
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
-	shuffledArray = shuffle(cardsArray); // Calls shuffle function
-	createDeck(shuffledArray); // Calls createDeck function (that takes shuffled array as an argument)
+	shuffledCardsArray = shuffle(cards); // Calls shuffle function
+	createDeck(shuffledCardsArray); // Calls createDeck function (that takes shuffled array as an argument)
 };
 
 // Create function createDeck()
-function createDeck(shuffledArray) {
+function createDeck(shuffledCardsArray) {
 	// Loop through every item in shuffled cards array
-	for (var i = 0; i < shuffledCards.length; i++) {
+	for (const card in shuffledCardsArray) {
 		let listEl = document.createElement('li'); // Create element <li> // Alternatively, use .attr
 		listEl.classList.add('card'); // Add .card to <li>
 		let itemEl = document.createElement('i'); // Create element <i>
 		itemEl.classList.add('fa'); // Add .fa to <i>
-		itemEl.classList.add(shuffledArray[i]); // Also add .fa-x to <i>
+		itemEl.classList.add(card); // Also add .fa-x to <i>
 		// Add HTML to page
 		listEl.appendChild(itemEl); // Append every <i> to every <li>
 		deck.appendChild(listEl); // Append every <li> to #deck
-		// Add event listener to every item
+		// Add eventListener to card
 		listEl.addEventListener('click', clickCard);
 	};
 };
@@ -65,7 +67,7 @@ function shuffle(array) {
 };
 
 function clickCard(event) {
-	event.target.classList.add('open');
+	event.target.classList.add('open', 'show');
 };
 
 // Start game
