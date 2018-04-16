@@ -25,6 +25,7 @@ const cards = [ // Create list that holds all cards
 let shuffledCardsArray = [];
 let matchedCardsArray = [];
 let openCardsArray = [];
+let moveCounter = 0;
 
 const deck = document.getElementById('deck'); // Create reference to #deck
 
@@ -66,17 +67,27 @@ function shuffle(array) {
     return array;
 };
 
+// ------------------------------------------------------------------------------------
+
+// PLAY GAME
+
 function clickCard(event) {
 	event.target.classList.add('open', 'show'); // Add classes .open .show to <li> that already has class .card
 	event.target.removeEventListener('click', clickCard); // Disable clicking on the same card twice
 	checkMatch(event); // For every card that is clicked, checkMatch() is ran
+	countMove();
+};
+
+function countMove() {
+	document.getElementById('moves').innerText = moveCounter;
 };
 
 
 function checkMatch(event) {
 	openCardsArray.push(event.target.firstChild); // Push every first child (<i> with classes fa-x) of clicked card (<li>) to openCardsArray
 	if (openCardsArray.length === 2) { // The following is only ran when two cards are in the array, not when only one card is
-		$(document.body).css('pointer-events', 'none'); // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
+		document.body.style.pointerEvents = 'none'; // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
+		moveCounter++; // With every two cards, moveCounter increments by 1
 		// For the two cards that are now in the array...
 		// ...check whether the icons in <i> are the same:
 		if (openCardsArray[0].className === openCardsArray[1].className) { // IF YES
@@ -107,8 +118,16 @@ function noMatchReset() {
 };
 
 function enableClicking() {
-	$(document.body).css('pointer-events', 'auto'); // Enable clicking remaining cards again after two clicked cards are either a match or not a match
-}
+	document.body.style.pointerEvents = 'auto'; // Enable clicking remaining cards again after two clicked cards are either a match or not a match
+};
+
+// ------------------------------------------------------------------------------------
+
+// MOVE COUNTER
+
+
+
+
 
 // Start game
 updateDeck();
