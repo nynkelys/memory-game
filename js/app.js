@@ -67,7 +67,9 @@ function shuffle(array) {
 };
 
 function clickCard(event) {
-	event.target.classList.add('open', 'show');
+	event.target.classList.add('open', 'show'); // Add classes .open .show to <li> that already has class .card
+	event.target.removeEventListener('click', clickCard);
+	openCardsArray.push(event); // Push clicked card to openCardsArray
 };
 
 // Start game
