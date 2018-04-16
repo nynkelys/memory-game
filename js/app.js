@@ -68,9 +68,47 @@ function shuffle(array) {
 
 function clickCard(event) {
 	event.target.classList.add('open', 'show'); // Add classes .open .show to <li> that already has class .card
-	event.target.removeEventListener('click', clickCard);
-	openCardsArray.push(event); // Push clicked card to openCardsArray
+	event.target.removeEventListener('click', clickCard); // Disable clicking on the same card twice
+	checkMatch(event); // For every card that is clicked, checkMatch() is ran
 };
+
+
+function checkMatch(event) {
+	openCardsArray.push(event.target.firstChild); // Push every first child (<i> with classes fa-x) of clicked card (<li>) to openCardsArray
+	if (openCardsArray.length === 2) { // The following is only ran when two cards are in the array, not when only one card is
+		$(document.body).css('pointer-events', 'none'); // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
+		// For the two cards that are now in the array...
+		// ...check whether the icons in <i> are the same:
+		if (openCardsArray[0].className === openCardsArray[1].className) { // IF YES
+			openCardsArray[0].parentNode.classList.add('match'); // Add class .match to cards <li> class (parent of <i>)
+			openCardsArray[1].parentNode.classList.add('match'); // Could also do loop, but since it's only two items...
+			matchedCardsArray.push(openCardsArray[0]); // Add array to matched cards array
+			matchedCardsArray.push(openCardsArray[1]);
+			openCardsArray = []; // Empty open cards array
+			enableClicking(); // Call enable clicking function
+		} else { // IF NO
+			setTimeout(function() {
+				for (let i = 0; i < openCardsArray.length; i++) { // For both cards in the array, make them clickable again
+					openCardsArray[i].parentNode.addEventListener('click', clickCard); // Add eventListener back to <li> (openCardsArray[i] refers to <i>, hence parentNode)
+				}
+			}, 1000);
+
+			setTimeout(noMatchReset, 1000); // Remove classes and make openCardsArray empty
+		};
+	};
+};
+
+function noMatchReset() {
+	for (let i = 0; i < openCardsArray.length; i++) {
+		openCardsArray[i].parentNode.classList.remove('show', 'open'); // Flip cards back
+	};
+	openCardsArray = []; // Empty open cards array
+	enableClicking(); // Call enable clicking function
+};
+
+function enableClicking() {
+	$(document.body).css('pointer-events', 'auto'); // Enable clicking remaining cards again after two clicked cards are either a match or not a match
+}
 
 // Start game
 updateDeck();
