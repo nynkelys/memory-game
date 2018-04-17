@@ -36,6 +36,8 @@ const stars = document.getElementById('stars');
 var starsItems = document.getElementById('stars').getElementsByTagName('li');
 const deck = document.getElementById('deck');
 let modal = document.getElementById('myModal');
+let totalMoves = document.getElementById('movesEnd')
+let movesDuring = document.getElementById('moves')
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
@@ -87,7 +89,7 @@ function clickCard(event) {
 };
 
 function countMove() {
-	document.getElementById('moves').innerText = moveCounter;
+	movesDuring.innerText = moveCounter;
 };
 
 
@@ -187,8 +189,9 @@ function startTimer() {
 // GAME ENDING
 
 function showModal() {
-	modal.style.display = 'block';
-	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML;
+	modal.style.display = 'block'; // Displays modal as whole
+	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML; // Displays time on modal
+	totalMoves.innerHTML = movesDuring.innerHTML; // THIS DOESN'T WORK YET: DISPLAYS ONE MOVE LESS THAN MOVE COUNTER?!?!
 };
 
 // Make functions that are called in end of matchedCards():
