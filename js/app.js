@@ -26,7 +26,14 @@ let shuffledCardsArray = [];
 let matchedCardsArray = [];
 let openCardsArray = [];
 let moveCounter = 0;
-
+var timer = {
+	seconds: 0,
+	minutes: 0,
+	clearTime: -1
+};
+let timeDisplay = document.getElementsByClassName('timer');
+const stars = document.getElementById('stars');
+var starsItems = document.getElementById('stars').getElementsByTagName('li');
 const deck = document.getElementById('deck'); // Create reference to #deck
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
@@ -84,10 +91,20 @@ function countMove() {
 
 
 function checkMatch(event) {
-	openCardsArray.push(event.target.firstChild); // Push every first child (<i> with classes fa-x) of clicked card (<li>) to openCardsArray
+	openCardsArray.push(event.target.firstChild);
+
+	if(timer.seconds === 0 && timer.minutes === 0) {
+		resetTimer();
+	};
+
 	if (openCardsArray.length === 2) { // The following is only ran when two cards are in the array, not when only one card is
 		document.body.style.pointerEvents = 'none'; // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
 		moveCounter++; // With every two cards, moveCounter increments by 1
+
+		if (moveCounter === 15 || moveCounter === 20) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
+			removeStar();
+		}
+
 		// For the two cards that are now in the array...
 		// ...check whether the icons in <i> are the same:
 		if (openCardsArray[0].className === openCardsArray[1].className) { // IF YES
@@ -109,6 +126,11 @@ function checkMatch(event) {
 	};
 };
 
+function removeStar() {
+	var last = starsItems[starsItems.length - 1]; // Remove last <li> item from <ul>
+	stars.removeChild(last);
+};
+
 function noMatchReset() {
 	for (let i = 0; i < openCardsArray.length; i++) {
 		openCardsArray[i].parentNode.classList.remove('show', 'open'); // Flip cards back
@@ -123,11 +145,43 @@ function enableClicking() {
 
 // ------------------------------------------------------------------------------------
 
-// MOVE COUNTER
+// TIMER
 
+// This function is only called when first card is clicked
+function resetTimer() {
+	clearInterval(timer.clearTime); // Reset timer state
+	timer.seconds = 0;
+	timer.minutes = 0;
+	timeDisplay[0].innerHTML = "0:00";
 
+	timer.clearTime = setInterval(startTimer, 1000); // Restarts timer
+};
 
+function startTimer() {
+	if (timer.seconds === 59) {
+		timer.minutes++;
+		timer.seconds = 0;
+	} else {
+		timer.seconds++;
+	}
 
+	// Ensure that single digit seconds are preceded with a 0
+	let firstSec = "0";
+	if (timer.seconds < 10) {
+		firstSec += timer.seconds; // Below 10, precede second with 0
+	} else {
+		firstSec = String(timer.seconds); // 10 and above, just display seconds, no preceding zero
+	}
+
+	let time = String(timer.minutes) + ":" + firstSec;
+	timeDisplay[0].innerHTML = time;
+};
+
+// GAME ENDING
+
+// 16 cards in matchedCardsArray
+// To stop timer: clearInterval(setTimer)
+// Reset number of stars
 
 // Start game
 updateDeck();
