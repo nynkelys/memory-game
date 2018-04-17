@@ -34,7 +34,8 @@ var timer = {
 let timeDisplay = document.getElementsByClassName('timer');
 const stars = document.getElementById('stars');
 var starsItems = document.getElementById('stars').getElementsByTagName('li');
-const deck = document.getElementById('deck'); // Create reference to #deck
+const deck = document.getElementById('deck');
+let modal = document.getElementById('myModal');
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
@@ -124,6 +125,12 @@ function checkMatch(event) {
 			setTimeout(noMatchReset, 1000); // Remove classes and make openCardsArray empty
 		};
 	};
+
+	// Game ending: if matchedCardsArray holds 16 cards
+	if (matchedCardsArray.length === 2) {
+		clearInterval(timer.clearTime); // Stops timer
+		showModal();
+	};
 };
 
 function removeStar() {
@@ -179,9 +186,16 @@ function startTimer() {
 
 // GAME ENDING
 
-// 16 cards in matchedCardsArray
-// To stop timer: clearInterval(setTimer)
+function showModal() {
+	modal.style.display = 'block';
+	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML;
+};
+
+// Make functions that are called in end of matchedCards():
+// To reset timer: clearInterval(setTimer)
 // Reset number of stars
+// Reset moves (moveCounter = 0)
 
 // Start game
 updateDeck();
+
