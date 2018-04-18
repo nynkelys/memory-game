@@ -135,8 +135,12 @@ function countMove() {
 };
 
 function removeStar() {
-	var last = starsItems[starsItems.length - 1]; // Remove last <li> item from <ul>
-	stars.removeChild(last);
+	if (moveCounter === 15) {
+		starThree.style.color = '#f9f6e8'
+	};
+	if (moveCounter === 20) {
+		starTwo.style.color = '#f9f6e8'
+	};
 };
 
 function noMatchReset() {
@@ -189,7 +193,7 @@ function startTimer() {
 function showModal() {
 	modal.style.display = 'block'; // Displays modal as whole
 	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML; // Displays time on modal
-	totalMoves.innerHTML = movesDuring.innerHTML; // THIS DOESN'T WORK YET: DISPLAYS ONE MOVE LESS THAN MOVE COUNTER?!?!
+	totalMoves.innerHTML = moveCounter; //
 };
 
 // Make functions that are called in end of matchedCards():
