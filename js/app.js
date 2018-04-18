@@ -84,14 +84,9 @@ function shuffle(array) {
 function clickCard(event) {
 	event.target.classList.add('open', 'show'); // Add classes .open .show to <li> that already has class .card
 	event.target.removeEventListener('click', clickCard); // Disable clicking on the same card twice
-	checkMatch(event); // For every card that is clicked, checkMatch() is ran
 	countMove();
+	checkMatch(event); // For every card that is clicked, checkMatch() is ran
 };
-
-function countMove() {
-	movesDuring.innerText = moveCounter;
-};
-
 
 function checkMatch(event) {
 	openCardsArray.push(event.target.firstChild);
@@ -102,7 +97,7 @@ function checkMatch(event) {
 
 	if (openCardsArray.length === 2) { // The following is only ran when two cards are in the array, not when only one card is
 		document.body.style.pointerEvents = 'none'; // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
-		moveCounter++; // With every two cards, moveCounter increments by 1
+		moveCounter = moveCounter + 1; // With every two cards, moveCounter increments by 1
 
 		if (moveCounter === 15 || moveCounter === 20) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
 			removeStar();
@@ -133,6 +128,10 @@ function checkMatch(event) {
 		clearInterval(timer.clearTime); // Stops timer
 		showModal();
 	};
+};
+
+function countMove() {
+	movesDuring.innerText = moveCounter;
 };
 
 function removeStar() {
