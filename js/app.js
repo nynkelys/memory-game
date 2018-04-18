@@ -84,8 +84,8 @@ function shuffle(array) {
 function clickCard(event) {
 	event.target.classList.add('open', 'show'); // Add classes .open .show to <li> that already has class .card
 	event.target.removeEventListener('click', clickCard); // Disable clicking on the same card twice
-	countMove();
 	checkMatch(event); // For every card that is clicked, checkMatch() is ran
+	countMove();
 };
 
 function checkMatch(event) {
@@ -101,7 +101,7 @@ function checkMatch(event) {
 
 		if (moveCounter === 15 || moveCounter === 20) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
 			removeStar();
-		}
+		};
 
 		// For the two cards that are now in the array...
 		// ...check whether the icons in <i> are the same:
@@ -154,7 +154,6 @@ function enableClicking() {
 // ------------------------------------------------------------------------------------
 
 // TIMER
-
 // This function is only called when first card is clicked
 function resetTimer() {
 	clearInterval(timer.clearTime); // Reset timer state
@@ -200,4 +199,3 @@ function showModal() {
 
 // Start game
 updateDeck();
-
