@@ -39,16 +39,16 @@ h1 { /* Header */
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #e2c468 0%, #fffddd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    min-height: 680px;
+    width: 660px;
+    background: linear-gradient(160deg, #e2c468 0%, #fffddd 100%);
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    padding: 32px;
     margin: 0 0 3em;
 }
 
@@ -104,7 +104,7 @@ h1 { /* Header */
     display: inline-block;
 }
 
-.score-panel .restart {
+.score-panel #restart {
     float: right;
     cursor: pointer;
 }

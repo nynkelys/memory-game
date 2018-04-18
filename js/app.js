@@ -26,14 +26,15 @@ let shuffledCardsArray = [];
 let matchedCardsArray = [];
 let openCardsArray = [];
 let moveCounter = 0;
-var timer = {
+let timer = {
 	seconds: 0,
 	minutes: 0,
 	clearTime: -1
 };
+let starCounter = 0;
 let timeDisplay = document.getElementsByClassName('timer');
 const stars = document.getElementById('stars');
-var starsItems = document.getElementById('stars').getElementsByTagName('li');
+let starsModal = document.getElementById('starsEnd');
 const deck = document.getElementById('deck');
 let modal = document.getElementById('myModal');
 let totalMoves = document.getElementById('movesEnd')
@@ -99,7 +100,7 @@ function checkMatch(event) {
 		document.body.style.pointerEvents = 'none'; // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
 		moveCounter = moveCounter + 1; // With every two cards, moveCounter increments by 1
 
-		if (moveCounter === 15 || moveCounter === 20) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
+		if (moveCounter === 1 || moveCounter === 3) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
 			removeStar();
 		};
 
@@ -131,15 +132,17 @@ function checkMatch(event) {
 };
 
 function countMove() {
-	movesDuring.innerText = moveCounter;
+	setMovesDuringText(moveCounter);
 };
 
 function removeStar() {
-	if (moveCounter === 15) {
+	if (moveCounter >= 1) {
 		starThree.style.color = '#f9f6e8'
+		starCounter = 2;
 	};
-	if (moveCounter === 20) {
+	if (moveCounter >= 3) {
 		starTwo.style.color = '#f9f6e8'
+		starCounter = 1;
 	};
 };
 
@@ -193,13 +196,38 @@ function startTimer() {
 function showModal() {
 	modal.style.display = 'block'; // Displays modal as whole
 	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML; // Displays time on modal
-	totalMoves.innerHTML = moveCounter; //
+	totalMoves.innerHTML = moveCounter;
+	starsModal.innerHTML = starCounter;
 };
 
-// Make functions that are called in end of matchedCards():
-// To reset timer: clearInterval(setTimer)
-// Reset number of stars
-// Reset moves (moveCounter = 0)
+function restartGame() {
+
+	updateDeck();
+	resetTimer();
+	starCounter = 0;
+	starTwo.style.color = '#000';
+	starThree.style.color = '#000';
+	moveCounter = 0;
+	setMovesDuringText(0);
+};
+
+function setMovesDuringText(numberOfMoves) {
+	movesDuring.innerHTML = numberOfMoves;
+}
+
+let restartSymbol = document.getElementById('restart');
+
+restartSymbol.addEventListener('click', restartGame)
+
+
+// Connect to replay symbol
+
+// RESTART
+// Hide modal
+// startGame()
+
+// REPLAY
+// startGame()
 
 // Start game
 updateDeck();
