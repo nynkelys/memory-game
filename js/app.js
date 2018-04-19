@@ -39,6 +39,7 @@ const deck = document.getElementById('deck');
 let modal = document.getElementById('myModal');
 let totalMoves = document.getElementById('movesEnd')
 let movesDuring = document.getElementById('moves')
+let restartSymbol = document.getElementById('restart');
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
@@ -203,7 +204,7 @@ function showModal() {
 function restartGame() {
 
 	updateDeck();
-	resetTimer();
+	resetTimerEnd();
 	starCounter = 0;
 	starTwo.style.color = '#000';
 	starThree.style.color = '#000';
@@ -211,11 +212,16 @@ function restartGame() {
 	setMovesDuringText(0);
 };
 
+function resetTimerEnd() {
+	clearInterval(timer.clearTime); // Reset timer state
+	timer.seconds = 0;
+	timer.minutes = 0;
+	timeDisplay[0].innerHTML = "0:00";
+};
+
 function setMovesDuringText(numberOfMoves) {
 	movesDuring.innerHTML = numberOfMoves;
-}
-
-let restartSymbol = document.getElementById('restart');
+};
 
 restartSymbol.addEventListener('click', restartGame)
 
