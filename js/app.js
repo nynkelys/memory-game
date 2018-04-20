@@ -19,8 +19,7 @@ const cards = [ // Create list that holds all cards
 
 // ------------------------------------------------------------------------------------
 
-// DISPLAY CARDS ON PAGE
-
+// VARIABLES TO START WITH
 
 let shuffledCardsArray = [];
 let matchedCardsArray = [];
@@ -41,6 +40,10 @@ let totalMoves = document.getElementById('movesEnd')
 let movesDuring = document.getElementById('moves')
 let restartSymbol = document.getElementById('restart');
 let replaySymbol = document.getElementById('replay');
+
+// ------------------------------------------------------------------------------------
+
+// DISPLAY CARDS ON PAGE
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
@@ -92,9 +95,9 @@ function clickCard(event) {
 };
 
 function checkMatch(event) {
-	openCardsArray.push(event.target.firstChild);
+	openCardsArray.push(event.target.firstChild); // Push clicked card to openCardsArray
 
-	if(timer.seconds === 0 && timer.minutes === 0) {
+	if(timer.seconds === 0 && timer.minutes === 0) { // When first card is clicked, start timer
 		resetTimer();
 	};
 
@@ -134,17 +137,17 @@ function checkMatch(event) {
 };
 
 function countMove() {
-	setMovesDuringText(moveCounter);
+	setMovesDuringText(moveCounter); // This is the text that needs to be displayed for the number of moves (movesDuring)
 };
 
 function removeStar() {
 	if (moveCounter >= 15) {
-		starThree.style.color = '#f9f6e8'
-		starCounter = 2;
+		starThree.style.color = '#f9f6e8' // More than 14 moves? One star less (changes from black to yellow)
+		starCounter = 2; // More than 14 moves? One star less on modal display
 	};
 	if (moveCounter >= 20) {
-		starTwo.style.color = '#f9f6e8'
-		starCounter = 1;
+		starTwo.style.color = '#f9f6e8' // More than 19 moves? Same!
+		starCounter = 1; // More than 19 move? Same!
 	};
 };
 
@@ -163,12 +166,13 @@ function enableClicking() {
 // ------------------------------------------------------------------------------------
 
 // TIMER
+
 // This function is only called when first card is clicked
 function resetTimer() {
 	clearInterval(timer.clearTime); // Reset timer state
 	timer.seconds = 0;
 	timer.minutes = 0;
-	timeDisplay[0].innerHTML = "0:00";
+	timeDisplay[0].innerHTML = "0:00"; // Default time display
 
 	timer.clearTime = setInterval(startTimer, 1000); // Restarts timer
 };
@@ -189,36 +193,38 @@ function startTimer() {
 		firstSec = String(timer.seconds); // 10 and above, just display seconds, no preceding zero
 	}
 
-	let time = String(timer.minutes) + ":" + firstSec;
-	timeDisplay[0].innerHTML = time;
+	let time = String(timer.minutes) + ":" + firstSec; // This is what displays ...
+	timeDisplay[0].innerHTML = time; /// ... on the game page
 };
+
+// ------------------------------------------------------------------------------------
 
 // GAME ENDING
 
 function showModal() {
 	modal.style.display = 'block'; // Displays modal as whole
 	timeDisplay[1].innerHTML = timeDisplay[0].innerHTML; // Displays time on modal
-	totalMoves.innerHTML = moveCounter;
-	starsModal.innerHTML = starCounter;
+	totalMoves.innerHTML = moveCounter; // Updates number of moves
+	starsModal.innerHTML = starCounter; // Updates number of stars
 };
 
 function restartGame() {
-	deleteDeck();
-	updateDeck();
+	deleteDeck(); // Remove all cards from deck and ...
+	updateDeck(); // ... add newly shuffled deck of cards
 	resetTimerEnd();
-	matchedCardsArray = [];
-	starCounter = 0;
-	starTwo.style.color = '#000';
+	matchedCardsArray = []; // Array back to default state
+	starCounter = 3;
+	starTwo.style.color = '#000'; // Stars back to black
 	starThree.style.color = '#000';
 	moveCounter = 0;
-	setMovesDuringText(0);
+	setMovesDuringText(0); // Display of moves back to zero
 };
 
 function deleteDeck() {
 	let ul = document.getElementById('deck');
 	if (ul) {
 		while (ul.firstChild) {
-			ul.removeChild(ul.firstChild);
+			ul.removeChild(ul.firstChild); // Remove all cards from deck
 		};
 	};
 };
@@ -235,22 +241,21 @@ function setMovesDuringText(numberOfMoves) {
 	movesDuring.innerHTML = numberOfMoves;
 };
 
-restartSymbol.addEventListener('click', restartGame)
+restartSymbol.addEventListener('click', restartGame) // Add function to restart symbol on game page
+
+// ------------------------------------------------------------------------------------
+
+// REPLAY SYMBOL
 
 // Connect to replay symbol
 function replayGame() {
-	modal.style.display = 'none';
+	modal.style.display = 'none'; // Hide modal
 	restartGame();
 };
 
-replaySymbol.addEventListener('click', replayGame)
+replaySymbol.addEventListener('click', replayGame) // Add function to replay symbol on modal display
 
-// RESTART
-// Hide modal
-// startGame()
-
-// REPLAY
-// startGame()
+// ------------------------------------------------------------------------------------
 
 // Start game
 updateDeck();
