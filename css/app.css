@@ -19,7 +19,7 @@ body {
 body {
     background: #ffffff url('http://www.designlovefest.com/wp-content/uploads/downloads/2013/09/01-Gold-Confetti.jpg');
     background-size: cover;
-    font-family: 'Coda', cursive;
+    font-family: 'Gothic A1', serif;
 }
 
 .container { /* div class for whole page */
@@ -30,8 +30,9 @@ body {
 }
 
 h1 { /* Header */
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-family: 'Cookie', sans-serif;
+    font-weight: 500;
+    font-size: 3em;
 }
 
 /*
@@ -114,10 +115,22 @@ h1 { /* Header */
  */
 
 #myModal {
+    margin-top: -105px;
     display: none;
     position: fixed;
-    overflow: auto;
     z-index: 1;
     text-align: center;
-    background-color: rgba(105, 105, 105, 0.8);
+    background: linear-gradient(160deg, #ffeb99 0%, #f2eada 100%);
+    padding-top: 20px;
+    padding-bottom: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 50%;
+    box-shadow: 5px 2px 20px 0 #4c4942;
+    border-style: outset;
+    border-color: #f7f2ea
+}
+
+#replay {
+    cursor: pointer;
 }

@@ -31,7 +31,7 @@ let timer = {
 	minutes: 0,
 	clearTime: -1
 };
-let starCounter = 0;
+let starCounter = 3;
 let timeDisplay = document.getElementsByClassName('timer');
 const stars = document.getElementById('stars');
 let starsModal = document.getElementById('starsEnd');
@@ -138,9 +138,6 @@ function countMove() {
 };
 
 function removeStar() {
-	if (moveCounter < 15) {
-		starCounter = 3;
-	};
 	if (moveCounter >= 15) {
 		starThree.style.color = '#f9f6e8'
 		starCounter = 2;
