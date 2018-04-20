@@ -5,7 +5,7 @@ Google/Udacity Front End Web Development Nanodegree: Project 3.
 
 * [Project](#project)
 * [Dependencies](#dependencies)
-* [Bugs] (#bugs)
+* [Known bugs](#known bugs)
 * [Contributing](#contributing)
 
 ## Project
@@ -25,7 +25,7 @@ The game ends once all cards have been correctly matched.
 
 No dependencies, but I did clone the starter code from [Udacity](https://github.com/udacity/fend-project-memory-game).
 
-## Bugs
+## Known bugs
 
 No known bugs.
 
