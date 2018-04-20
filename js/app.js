@@ -40,6 +40,7 @@ let modal = document.getElementById('myModal');
 let totalMoves = document.getElementById('movesEnd')
 let movesDuring = document.getElementById('moves')
 let restartSymbol = document.getElementById('restart');
+let replaySymbol = document.getElementById('replay');
 
 // Create function updateDeck() in which both shuffle() and createDeck() are called
 function updateDeck() {
@@ -202,7 +203,7 @@ function showModal() {
 };
 
 function restartGame() {
-
+	deleteDeck();
 	updateDeck();
 	resetTimerEnd();
 	starCounter = 0;
@@ -211,6 +212,16 @@ function restartGame() {
 	moveCounter = 0;
 	setMovesDuringText(0);
 };
+
+function deleteDeck() {
+	let ul = document.getElementById('deck');
+	if (ul) {
+		while (ul.firstChild) {
+			ul.removeChild(ul.firstChild);
+		};
+	};
+};
+
 
 function resetTimerEnd() {
 	clearInterval(timer.clearTime); // Reset timer state
@@ -225,8 +236,20 @@ function setMovesDuringText(numberOfMoves) {
 
 restartSymbol.addEventListener('click', restartGame)
 
-
 // Connect to replay symbol
+function replayGame() {
+	modal.style.display = 'none';
+	deleteDeck();
+	updateDeck();
+	resetTimerEnd();
+	starCounter = 0;
+	starTwo.style.color = '#000';
+	starThree.style.color = '#000';
+	moveCounter = 0;
+	setMovesDuringText(0);
+};
+
+replaySymbol.addEventListener('click', replayGame)
 
 // RESTART
 // Hide modal
