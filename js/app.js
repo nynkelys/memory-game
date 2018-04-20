@@ -102,7 +102,7 @@ function checkMatch(event) {
 		document.body.style.pointerEvents = 'none'; // Disable clicking on a third card by disabling clicking on anything until this function is ran completely
 		moveCounter = moveCounter + 1; // With every two cards, moveCounter increments by 1
 
-		if (moveCounter === 1 || moveCounter === 3) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
+		if (moveCounter === 15 || moveCounter === 20) { // removeStar() needs to be put inside this function, as it depends on moveCounter value
 			removeStar();
 		};
 
@@ -127,7 +127,7 @@ function checkMatch(event) {
 	};
 
 	// Game ending: if matchedCardsArray holds 16 cards
-	if (matchedCardsArray.length === 2) {
+	if (matchedCardsArray.length === 16) {
 		clearInterval(timer.clearTime); // Stops timer
 		showModal();
 	};
@@ -138,11 +138,14 @@ function countMove() {
 };
 
 function removeStar() {
-	if (moveCounter >= 1) {
+	if (moveCounter < 15) {
+		starCounter = 3;
+	};
+	if (moveCounter >= 15) {
 		starThree.style.color = '#f9f6e8'
 		starCounter = 2;
 	};
-	if (moveCounter >= 3) {
+	if (moveCounter >= 20) {
 		starTwo.style.color = '#f9f6e8'
 		starCounter = 1;
 	};
@@ -206,6 +209,7 @@ function restartGame() {
 	deleteDeck();
 	updateDeck();
 	resetTimerEnd();
+	matchedCardsArray = [];
 	starCounter = 0;
 	starTwo.style.color = '#000';
 	starThree.style.color = '#000';
@@ -239,14 +243,7 @@ restartSymbol.addEventListener('click', restartGame)
 // Connect to replay symbol
 function replayGame() {
 	modal.style.display = 'none';
-	deleteDeck();
-	updateDeck();
-	resetTimerEnd();
-	starCounter = 0;
-	starTwo.style.color = '#000';
-	starThree.style.color = '#000';
-	moveCounter = 0;
-	setMovesDuringText(0);
+	restartGame();
 };
 
 replaySymbol.addEventListener('click', replayGame)
