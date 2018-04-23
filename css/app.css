@@ -116,7 +116,7 @@ h1 { /* Header */
 
 #myModal {
     margin-top: -126px;
-    display: block;
+    display: none;
     position: fixed;
     z-index: 1;
     text-align: center;
