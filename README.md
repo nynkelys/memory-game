@@ -7,6 +7,7 @@ Google/Udacity Front End Web Development Nanodegree: Project 3.
 * [Dependencies](#dependencies)
 * [Bugs](#bugs)
 * [Contributing](#contributing)
+* [Credits](#credits)
 
 ## Project
 
@@ -32,3 +33,7 @@ No known bugs.
 ## Contributing
 
 I most likely will not accept pull requests.
+
+## Credits
+
+Background image depicts my favorite game, Two Dots. Image retrieved from [this website](http://www.offgamers.com/blog/wp-content/uploads/2015/06/TwoDots_mountains_desktop.jpg).
